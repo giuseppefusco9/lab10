@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.20.1">
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\Configuration.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumber.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberApp.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberImpl.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberView.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberViewImpl.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberViewObserver.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawResult.java">
+</file>
+<file name="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\PrintStreamView.java">
+</file>
+</checkstyle>

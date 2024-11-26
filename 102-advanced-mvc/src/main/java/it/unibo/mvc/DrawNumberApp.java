@@ -1,24 +1,29 @@
 package it.unibo.mvc;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.StringTokenizer;
 /**
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
-    private static final int MIN = 0;
-    private static final int MAX = 100;
-    private static final int ATTEMPTS = 10;
-
+    private static final String ATTEMPTS_STRING = "attempts";
+    private static final String MAXIMUM_STRING = "maximum";
+    private static final String MINIMUM_STRING = "minimum";
     private final DrawNumber model;
     private final List<DrawNumberView> views;
 
     /**
-     * @param views
-     *            the views to attach
+     * @param views the views to attach
+     * @param fileName the name of the file to open
+     * @throws IOException 
+     * @throws FileNotFoundException 
      */
-    public DrawNumberApp(final DrawNumberView... views) {
+    public DrawNumberApp(final String fileName, final DrawNumberView... views) throws FileNotFoundException, IOException {
         /*
          * Side-effect proof
          */
@@ -27,7 +32,28 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
             view.setObserver(this);
             view.start();
         }
-        this.model = new DrawNumberImpl(MIN, MAX, ATTEMPTS);
+        final Configuration values = dataFromFile(fileName).build();
+        this.model = new DrawNumberImpl(values.getMin(), values.getMax(), values.getAttempts());
+    }
+
+    private Configuration.Builder dataFromFile(final String fileName) throws FileNotFoundException, IOException {
+        final Configuration.Builder retValue = new Configuration.Builder();
+        try (var reader = new BufferedReader(
+                new InputStreamReader(
+                    ClassLoader.getSystemResourceAsStream(fileName), StandardCharsets.UTF_8))) {
+            for (var line = reader.readLine(); line != null; line = reader.readLine()) {
+                final StringTokenizer st = new StringTokenizer(line, ": ");
+                final String element = st.nextToken();
+                if (MINIMUM_STRING.equals(element)) {
+                    retValue.putMin(Integer.parseInt(st.nextToken(": ")));
+                } else if (MAXIMUM_STRING.equals(element)) {
+                    retValue.putMax(Integer.parseInt(st.nextToken(": ")));
+                } else if (ATTEMPTS_STRING.equals(element)) {
+                    retValue.putAttempts(Integer.parseInt(st.nextToken(": ")));
+                }
+            }
+        }
+        return retValue;
     }
 
     @Override
@@ -57,16 +83,17 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
          * should be paid to alive threads, as the application would continue to persist
          * until the last thread terminates.
          */
-        System.exit(0);
+        //System.exit(0);
     }
 
     /**
-     * @param args
-     *            ignored
-     * @throws FileNotFoundException 
-     */
-    public static void main(final String... args) throws FileNotFoundException {
-        new DrawNumberApp(new DrawNumberViewImpl());
+     * @param args ignored
+     * @throws IOException 
+    */
+     public static void main(final String... args) throws IOException {
+        new DrawNumberApp("config.yml", new DrawNumberViewImpl(), 
+            new DrawNumberViewImpl(), 
+            new PrintStreamView(System.out), 
+            new PrintStreamView("output.log"));
     }
-
 }
