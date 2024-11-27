@@ -2,7 +2,7 @@
 <pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          pmdVersion="7.7.0"
-         timestamp="2024-11-26T17:38:29.1919059+01:00"
+         timestamp="2024-11-27T10:10:02.98497+01:00"
          version="1.0.0"
          xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd.github.io/schema/cpd-report_1_0_0.xsd">
    <file path="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\Configuration.java"
@@ -10,7 +10,7 @@
    <file path="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumber.java"
          totalNumberOfTokens="15"/>
    <file path="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberApp.java"
-         totalNumberOfTokens="448"/>
+         totalNumberOfTokens="494"/>
    <file path="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberImpl.java"
          totalNumberOfTokens="192"/>
    <file path="C:\Users\Giuseppe Fusco\Desktop\OOP\oop-lab10\lab10\102-advanced-mvc\src\main\java\it\unibo\mvc\DrawNumberView.java"

@@ -36,7 +36,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
         this.model = new DrawNumberImpl(values.getMin(), values.getMax(), values.getAttempts());
     }
 
-    private Configuration.Builder dataFromFile(final String fileName) throws FileNotFoundException, IOException {
+    private Configuration.Builder dataFromFile(final String fileName) {
         final Configuration.Builder retValue = new Configuration.Builder();
         try (var reader = new BufferedReader(
                 new InputStreamReader(
@@ -44,16 +44,25 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
             for (var line = reader.readLine(); line != null; line = reader.readLine()) {
                 final StringTokenizer st = new StringTokenizer(line, ": ");
                 final String element = st.nextToken();
-                if (MINIMUM_STRING.equals(element)) {
-                    retValue.putMin(Integer.parseInt(st.nextToken(": ")));
-                } else if (MAXIMUM_STRING.equals(element)) {
-                    retValue.putMax(Integer.parseInt(st.nextToken(": ")));
-                } else if (ATTEMPTS_STRING.equals(element)) {
-                    retValue.putAttempts(Integer.parseInt(st.nextToken(": ")));
+                switch (element) {
+                    case MINIMUM_STRING -> retValue.putMin(Integer.parseInt(st.nextToken(": ")));
+                    case MAXIMUM_STRING -> retValue.putMax(Integer.parseInt(st.nextToken(": ")));
+                    case ATTEMPTS_STRING -> retValue.putAttempts(Integer.parseInt(st.nextToken(": ")));
+                    default -> displayViewsError("No values for " + element + " found");
                 }
             }
+        } catch (NumberFormatException e) {
+            displayViewsError("Invalid number format in configuration file: " + e.getMessage());
+        } catch (IOException e) {
+            displayViewsError("Error reading configuration file: " + e.getMessage());
         }
         return retValue;
+    }
+
+    private void displayViewsError(final String msg) {
+        for (final DrawNumberView view : views) {
+            view.displayError(msg);
+        }
     }
 
     @Override
